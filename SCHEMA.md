@@ -34,14 +34,15 @@ Each transaction requires these fields, with an optional income_source label for
 | category | User-chosen grouping; no private or provider-specific classification rules |
 | kind | income, spending, refund, investment_deposit, investment_withdrawal, transfer_in, or transfer_out |
 | control | inside, mixed or outside; a user-supplied lens |
-| recurring | Boolean; explicitly supplied, never inferred from frequency |
+| recurring | Original supplied Boolean evidence, retained independently of later review decisions |
+| regularity | Optional explicit review: regular, other or not_reviewed. Missing means Not reviewed, including imported false defaults |
 | notable | Boolean; marks the payment without adding it again |
 | account_id | Optional local import-account identity; distinct from bank reference and holding account labels |
 | external_id | Optional bank transaction reference, at most 255 characters; meaningful only within its source account |
 
 income, refund, investment_withdrawal and transfer_in must be positive. spending, investment_deposit and transfer_out must be negative. Refunds must use the spending category they offset. Separate internal transfer legs both belong in the ledger if both accounts are in scope; do not import only one leg and mistake it for earnings or spending. Opening cash starts the cash-reserve history. Adding every signed ledger movement once gives the closing cash balance. It does not infer wealth or investment gains.
 
-baseline is null or `{ "income_minor": 304600, "commitments": [...] }`. Monthly income must be positive. Each commitment is `{ "label": "Example annual cover", "amount_minor": 18370, "frequency": "annual" }`, with positive amount and frequency monthly or annual. At most 100 commitments. Annual amounts become monthly equivalents by dividing by 12; sub-penny equivalents are displayed rounded, but retained in the calculation.
+baseline is null or `{ "income_minor": 304600, "commitments": [...] }`. Monthly income must be positive. Each commitment is `{ "label": "Example annual cover", "amount_minor": 18370, "frequency": "annual" }`, with positive amount and frequency monthly, quarterly or annual. At most 100 commitments. Quarterly amounts divide by 3 and annual amounts divide by 12 for monthly equivalents; sub-penny equivalents are displayed rounded, but retained in the calculation.
 
 Each holding is `{ "label": "Example reserve", "value_minor": 547300, "date": "2026-06-30" }`. Investment values are nonnegative; cash values may be negative for an overdraft. All are dated no later than coverage. At most 100 holdings. Snapshots are not added to cash flows or used to infer returns.
 
@@ -49,13 +50,13 @@ holding_history uses the same row shape as holdings, with at most 1,200 snapshot
 
 mortgage is null or `{ "balance_minor": 15370000, "annual_rate": 0.0387, "payment_minor": 94600, "date": "2026-06-30" }`. Balance and payment are positive; rate is a finite fraction between 0 and 1; date is no later than coverage. The illustration starts at this date and does not assert principal repayment from transaction history.
 
-Each action is `{ "label": "Compare example cover", "date": "2026-08-23", "status": "estimated" }`. Status is confirmed, estimated or unknown. Unknown requires date null; the other statuses require a day-precise date. At most 100 actions. A payment date does not establish a renewal date. Supply action dates independently.
+Each action is `{ "label": "Compare example cover", "date": "2026-08-23", "status": "estimated" }`. Status is confirmed, estimated or unknown. Unknown requires date null; the other statuses require a day-precise date. At most 100 actions. A payment date does not establish a renewal date. Supply action dates independently. Optional completed_on is the actual YYYY-MM-DD completion date; it preserves the due date and financial coverage. Missing means active.
 
 Use the blank HTML app for your own data. For a complete fictional example, load Steve’s made-up data from the app and export JSON. If you construct JSON from that example, remove all invented rows and snapshots, set fictional to false, and keep it private.
 
 ## Optional chart detail
 
-An incoming transaction may include `income_source`, a non-empty label such as Salary or Freelance. Outgoing stacks use the transaction kind and `recurring`: investment contributions, transfers, regular commitments or other spending.
+An incoming transaction may include `income_source`, a non-empty label such as Salary or Freelance. The reviewed outgoing view uses transaction kind and explicit regularity: investment contributions, transfers, Regular costs, Other spending or Not reviewed. The original recurring flag remains source evidence, not confirmation.
 
 `income_history` is an optional list of records with `date`, `gross_minor` and `take_home_minor`. Use at most one record per calendar month. Values must be non-negative integer pennies, gross must be at least take-home, and dates must not exceed `as_of`. These recorded values supply the two income lines. Without them, the chart shows earned income from the ledger alone.
 
@@ -148,3 +149,5 @@ Optional `performance_history` stores independent recorded investment performanc
 Optional saved appearance `colors` accepts `gold_white` or `semantic`; omitted means the existing semantic palette. This affects presentation only and does not reclassify records, change amounts, erase drafts or alter source coverage.
 
 Hosted fictional landings open Guidance and restart supported autoplay with three example notable outgoings. Local saved copies keep explicit folds, playback and marker choices. The legacy paymentMarkers field remains readable for recovery, while each selected notable payment now directly displays its date marker; there is no separate master checkbox.
+
+Regularity reviews keep category and original source fields unchanged. Confirm only the exact previewed merchant/account rows; stale, missing, duplicate or ambiguous identities reject the complete batch. One Undo restores the batch. Existing correction identity, source matching, ambiguity holds and both recovery codecs apply. Future imports are not automatically reviewed, and shopping-order evidence remains separate.

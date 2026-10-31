@@ -19,3 +19,28 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Scope clarification, 31 October 2026
+
+The MIT licence above covers original Treasury code and technical documentation,
+including HTML, CSS, JavaScript, scripts and tests. Creative content embedded in
+code or HTML is subject to its own terms; embedding does not change those terms.
+
+For new original Treasury artwork, illustrations and other creative assets,
+unless separately licensed: to the extent Sam holds the necessary rights, you
+may use, copy, modify and share them to run and develop The Treasury, including
+modified versions of The Treasury. No permission is granted under these terms
+to reuse them in unrelated products, asset packs or branding. Other rights are
+reserved. This does not assert exclusive rights in AI-generated material or
+grant rights that Sam does not hold.
+
+Existing grants remain valid. This clarification does not withdraw or restrict
+permissions already granted for distributed versions or assets. In particular,
+the chest and icon bytes identified in ARTWORK.md were already distributed
+under the earlier broad MIT licence; those MIT permissions remain available
+for those bytes and copies of them, including in later Treasury versions.
+
+Third-party assets and marks retain their own terms, as listed in
+THIRD_PARTY_NOTICES.md. The MIT licence and creative-asset terms do not grant
+trademark rights. No licence to anyone's personal financial records is granted;
+they are not part of this source package.
