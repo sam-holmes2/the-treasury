@@ -13,10 +13,10 @@ Steve’s figures are made up. Download a blank Treasury to use your own data.
 ## Get started
 
 1. Download **Treasury.html** and open it in your browser. Nothing to install.
-2. Import a bank CSV or supported OFX statement, or add records yourself. Check the preview before importing.
+2. Choose your currency in **Currency settings** before adding records. Import a matching-currency bank CSV or supported OFX statement, or add records yourself. Check the preview before importing.
 3. Use **Save copy** to keep your changes. Open that saved file next time.
 
-Currently supports £ accounts. Bank exports vary, so some files may need adjusting first. Help inside the app covers importing and saving.
+Each Treasury uses one currency. Saved files remember it; choosing another currency after adding records downloads a separate blank Treasury and leaves your current records in place. There is no currency conversion. Bank exports vary, so some files may need adjusting first. Help inside the app covers importing and saving.
 
 ## Your data
 
