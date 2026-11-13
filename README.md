@@ -10,6 +10,8 @@ See what you earn, what you spend and how your savings change.
 
 Steve’s figures are made up. Download a blank Treasury to use your own data.
 
+![Fictional Treasury demo showing spending categories and payment detail](assets/treasury-spending-detail.png)
+
 ## Get started
 
 1. Download **Treasury.html** and open it in your browser. Nothing to install.
